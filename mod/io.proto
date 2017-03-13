@@ -1,0 +1,64 @@
+package music;
+
+message Sample {
+	optional string name = 1;
+	optional int32 length = 2;
+	optional int32 finetune = 3;
+	optional int32 volume = 4;
+	optional int32 repeat_start = 5;
+	optional int32 repeat_length = 6;
+	repeated int32 data = 7;
+}
+
+enum Effect {
+	FX_Arpeggio = 1;
+	FX_Slide_up = 2;
+	FX_Slide_down = 3;
+	FX_Slide_to_note = 4;
+	FX_Vibrato = 5;
+	FX_Continue_Slide_to_note_with_Volume_slide = 6;
+	FX_Continue_Vibrato_with_Volume_slide = 7;
+	FX_Tremolo = 8;
+	FX_Set_panning_position = 9;
+	FX_Set_sample_offset = 10;
+	FX_Volume_slide = 11;
+	FX_Position_Jump = 12;
+	FX_Set_volume = 13;
+	FX_Pattern_Break = 14;
+	FX_Set_filter_on_or_off = 15;
+	FX_Fineslide_up = 16;
+	FX_Fineslide_down = 17;
+	FX_Set_glissando_on_or_off = 18;
+	FX_Set_vibrato_waveform = 19;
+	FX_Set_finetune_value = 20;
+	FX_Loop_pattern = 21;
+	FX_Set_tremolo_waveform = 22;
+	FX_Unused = 23;
+	FX_Retrigger_sample = 24;
+	FX_Fine_volume_slide_up = 25;
+	FX_Fine_volume_slide_down = 26;
+	FX_Cut_sample = 27;
+	FX_Delay_sample = 28;
+	FX_Delay_pattern = 29;
+	FX_Invert_loop = 30;
+	FX_Set_speed = 31;
+}
+
+message Num {
+	optional int32 sample = 1;
+	optional int32 period = 2;
+	optional Effect effect = 3;
+	optional int32 x = 4;
+	optional int32 y = 5;
+}
+
+message Pattern {
+	repeated Num num = 1;
+}
+
+message Music {
+	optional string name = 1;
+	repeated Sample sample = 2;
+	repeated int32 pattern = 3;
+	repeated Pattern pattern_data = 4;
+}

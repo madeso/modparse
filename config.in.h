@@ -1,0 +1,1 @@
+#cmakedefine CONFIG_USE_BINARY

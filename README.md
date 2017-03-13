@@ -1,2 +1,4 @@
 # modparse
-parse and play(?) mod files
+
+This is a older project to parse mod files and save them in a protobuf format.
+

@@ -1,0 +1,24 @@
+project(mod)
+cmake_minimum_required(VERSION 2.8)
+set_property(GLOBAL PROPERTY USE_FOLDERS OFF)
+
+option(BUILD_USE_CLANG_FORMAT "Add clang format to the build" ON)
+option(BUILD_USE_CPPLINT "Add cpplint to the build" ON)
+option(BUILD_USE_DOXYGEN "Add doxygen to the build" ON)
+option(BUILD_USE_DOXYGEN_GLOBAL "Add doxygen as a seperate build" ON)
+option(BUILD_USE_CPPCHECK "run cppcheck on all source" ON)
+option(CONFIG_USE_BINARY "use binary?" ON)
+
+find_package(Doxygen REQUIRED)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.ini ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+configure_file ("${PROJECT_SOURCE_DIR}/config.in.h" "${PROJECT_BINARY_DIR}/config.h" )
+if(BUILD_USE_DOXYGEN_GLOBAL)
+	add_custom_target(doxygen ALL
+		${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+		COMMENT "Running Doxygen" VERBATIM)
+endif(BUILD_USE_DOXYGEN_GLOBAL)
+
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories("${PROJECT_BINARY_DIR}")
+add_subdirectory(mod)
